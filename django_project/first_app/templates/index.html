@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title Main Page</title>
+    <link rel="stylesheet" href="{% static 'css/app_styles.css' %}">
+</head>
+<body>
+{# {{  }} #}
+{# {%  %} #}
+<h2> Python Courses Group #{{ group_id }}</h2>
+<p><strong>Teacher</strong>: {{ teacher }}</p>
+
+<table>
+    <tr>
+        <th> ID </th>
+        <th>Name</th>
+        <th>Points</th>
+    </tr>
+    {% for student in students %}
+        <tr>
+            <td>{{ student.id }} </td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.points }}</td>
+        </tr>
+    {%  endfor %}
+</table>
+
+
+</body>
+</html>
