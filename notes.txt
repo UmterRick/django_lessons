@@ -1,0 +1,18 @@
+MVC - Model View Controller
+Model - відображення і взаємодія з данними
+View - Логіка
+Controller - звʼязок з зовнішнім світом
+
+
+Django
+MVT - Model View Template
+Model - відображення і взаємодія з данними
+View - Логіка
+Template - візуалізація (html pages)
+Controller - django
+
+
+
+
+
+
