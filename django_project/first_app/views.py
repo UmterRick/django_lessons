@@ -1,7 +1,7 @@
 import random
 
 from django.shortcuts import render
-
+from .models import Book, Author
 
 # Create your views here.
 
@@ -26,11 +26,28 @@ def main_page(request):
 
 
 def lessons_page(request):
+    books_to_render = Book.objects.all()
     return render(request=request, template_name="lessons.html",
                   context={"teacher": "Vladyslav",
                            "group_id": 1,
                            })
 
+
+def library(request):
+    p = Book.objects.all().order_by('rating').values('title', 'rating')
+    print(p)
+    p.title = "ahahahah prank"
+    p.title = "sadasdnas"
+    p.rating = 5
+
+    p.save()
+
+
+    return render(request=request, template_name="books.html",
+                  context={"teacher": "Vladyslav",
+                           "group_id": 1,
+                           "books": Book.objects.all()
+                           })
 
 def notes_page(request):
     return  render(request, "notes.html")
