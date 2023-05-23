@@ -3,32 +3,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {%  block title %}
-    <title>Title Main Page</title>
-    {%  endblock %}
+
+    <title>
+        {% block title %}
+            Title Main Page
+        {% endblock %}
+    </title>
+
     <link rel="stylesheet" href="{% static 'css/app_styles.css' %}">
 </head>
 <body>
 {% block group-info %}
-<h2> Python Courses Group #{{ group_id }}</h2>
-<p><strong>Teacher</strong>: {{ teacher }}</p>
+    <h2> Python Courses Group #{{ group_id }}</h2>
+    <p><strong>Teacher</strong>: {{ teacher }}</p>
 {% endblock %}
-{% block group-students %}
-<table>
-    <tr>
-        <th> ID </th>
-        <th>Name</th>
-        <th>Points</th>
-    </tr>
-    {% for student in students %}
+{% block content %}
+    <table>
         <tr>
-            <td>{{ student.id }} </td>
-            <td>{{ student.name }}</td>
-            <td>{{ student.points }}</td>
+            <th> ID</th>
+            <th>Name</th>
+            <th>Points</th>
         </tr>
-    {%  endfor %}
-</table>
-{% endblock group-students %}
+        {% for student in students %}
+            <tr>
+                <td>{{ student.id }} </td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.points }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}
 
 </body>
 </html>

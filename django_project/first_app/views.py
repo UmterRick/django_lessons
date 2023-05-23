@@ -18,5 +18,12 @@ def main_page(request):
                            })
 
 
+def render_lesson_info(request):
+    ...
+
+def render_student_profile(request):
+    ...
+
+
 
 
