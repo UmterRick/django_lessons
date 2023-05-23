@@ -17,11 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from first_app.views import main_page, lessons_page, library
+from first_app.views import main_page,
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_page),
-    path('lessons', lessons_page),
-    path("library", library)
 ]
