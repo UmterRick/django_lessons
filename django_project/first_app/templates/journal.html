@@ -4,7 +4,11 @@
 
 {% block content %}
 <table>
-
+    {% for relation in student_lesson_relations %}
+        <tr>
+            <td>{{ relation.student.username }}</td>
+        </tr>
+    {% endfor %}
 </table>
 
 {% endblock %}

@@ -1,7 +1,5 @@
-import random
-
 from django.shortcuts import render
-from .models import Lesson, Student, StudentLessonRelation
+from .models import Lesson, StudentLessonRelation
 
 # Create your views here.
 
@@ -9,7 +7,7 @@ from .models import Lesson, Student, StudentLessonRelation
 
 
 def main_page(request):
-    teacher = "Vladyslav"
+    teacher = ...
     students = []
     return render(request=request, template_name="base.html",
                   context={"teacher": teacher,
