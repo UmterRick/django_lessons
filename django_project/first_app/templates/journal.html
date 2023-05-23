@@ -6,33 +6,30 @@
 {% endblock %}
 
 {% block content %}
+            {{ lessons }}
+
     <table>
         <tr>
             <th> Student</th>
-            {% for i in '1234'|make_list %}
-                <th> {{ i }}</th>
-
-            {% endfor %}
-
-            {% for student, rel_data in journal.items %}
-                <th> Hello</th>
+            {% for lesson in lessons %}
+                <th>{{ lesson.title }}</th>
             {% endfor %}
         </tr>
-        {#        {% for student, rel_data in journal.items %}#}
-        {#            <tr>#}
-        {#                <td>{{ student.email }}</td>#}
-        {##}
-        {#                <td>#}
-        {#                    {% if rel_data.visited %}#}
-        {#                        ✅#}
-        {#                    {% else %}#}
-        {#                        ❌#}
-        {#                    {% endif %}#}
-        {#                    Points: {{ rel_data.points }}#}
-        {#                </td>#}
-        {##}
-        {#            </tr>#}
-        {#        {% endfor %}#}
+                {% for student, rel_data in journal %}
+                    <tr>
+                        <td><a href="{% url 'student-info' pk=student.pk%}"> {{ student.email }} </a></td>
+
+                        <td>
+                            {% if rel_data.visited %}
+                                ✅
+                            {% else %}
+                                ❌
+                            {% endif %}
+                            Points: {{ rel_data.points }}
+                        </td>
+
+                    </tr>
+                {% endfor %}
     </table>
 
 {% endblock %}
