@@ -13,11 +13,11 @@ class Group(models.Model):
     title = models.CharField(max_length=100, null=False)
     description = models.TextField()
 
+
 class Student(User):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_staff = False
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
-
 
 
 class Lesson(models.Model):
