@@ -1,14 +1,38 @@
 {% extends "base.html" %}
 {% block title %} Journal {% endblock %}
-
+{% block group-info %}
+    <h2> {{ group.title }}</h2>
+    <p><strong>Teacher: </strong> {{ teacher.first_name }} {{ teacher.last_name }}</p>
+{% endblock %}
 
 {% block content %}
-<table>
-    {% for relation in student_lesson_relations %}
+    <table>
         <tr>
-            <td>{{ relation.student.username }}</td>
+            <th> Student</th>
+            {% for i in '1234'|make_list %}
+                <th> {{ i }}</th>
+
+            {% endfor %}
+
+            {% for student, rel_data in journal.items %}
+                <th> Hello</th>
+            {% endfor %}
         </tr>
-    {% endfor %}
-</table>
+        {#        {% for student, rel_data in journal.items %}#}
+        {#            <tr>#}
+        {#                <td>{{ student.email }}</td>#}
+        {##}
+        {#                <td>#}
+        {#                    {% if rel_data.visited %}#}
+        {#                        ✅#}
+        {#                    {% else %}#}
+        {#                        ❌#}
+        {#                    {% endif %}#}
+        {#                    Points: {{ rel_data.points }}#}
+        {#                </td>#}
+        {##}
+        {#            </tr>#}
+        {#        {% endfor %}#}
+    </table>
 
 {% endblock %}
