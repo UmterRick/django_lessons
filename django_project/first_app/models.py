@@ -4,7 +4,6 @@ import uuid
 
 
 class Teacher(User):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_staff = True
 
 
@@ -15,7 +14,6 @@ class Group(models.Model):
 
 
 class Student(User):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_staff = False
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
