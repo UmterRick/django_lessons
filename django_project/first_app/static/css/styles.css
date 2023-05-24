@@ -1,0 +1,5 @@
+.table-min-width > th,
+    .table-min-width > td {
+      max-width: 100px; /* Adjust this value as needed */
+      white-space: nowrap;
+    }

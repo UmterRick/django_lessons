@@ -10,14 +10,19 @@ def main_page(request):
     teacher = LMSUser.objects.get(group=group, role='teacher')
     relations = StudentLessonRelation.objects.filter(student__group=group.pk)
     lessons = Lesson.objects.all()
-    journal = []
+    journal = {}
     for relation in relations:
-        journal.append((relation.student, relation))
+
+        if relation.student not in journal:
+            journal[relation.student] = [relation]
+        else:
+            journal[relation.student].append(relation)
 
     return render(request=request, template_name="journal.html",
                   context={"teacher": teacher,
                            "journal": journal,
                            "lessons": lessons,
+                           "rels": relations,
                            "group": group,
                            })
 

@@ -6,30 +6,44 @@
 {% endblock %}
 
 {% block content %}
-            {{ lessons }}
-
-    <table>
+    <table class="table table-bordered table-min-width">
+        <thead>
         <tr>
             <th> Student</th>
             {% for lesson in lessons %}
-                <th>{{ lesson.title }}</th>
+                <th class="min-width">{{ lesson.title }}</th>
             {% endfor %}
         </tr>
-                {% for student, rel_data in journal %}
-                    <tr>
-                        <td><a href="{% url 'student-info' pk=student.pk%}"> {{ student.email }} </a></td>
+        </thead>
+        <tbody>
+        {% for student, lesson_info in journal.items %}
+            <tr>
+                <td>
+                    <a href="{% url 'student-info' pk=student.pk %}">{{ student.email }}</a>
+                </td>
+                {% for lesson in lesson_info %}
 
-                        <td>
-                            {% if rel_data.visited %}
-                                ✅
-                            {% else %}
-                                ❌
-                            {% endif %}
-                            Points: {{ rel_data.points }}
-                        </td>
+                    <td>
+                        <div class="journal-student-cell d-flex flex-row justify-content-around w-20 ">
+                            <div class="d-flex">
+                                {% if lesson.visited %}
+                                    <i class="bi bi-check"></i>
+                                {% else %}
+                                    <i class="bi bi-x-square"></i>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span><strong>Comment: </strong> {{ lesson.comment|truncatechars:10 }}</span>
+                                <span><strong>Points:</strong> {{ lesson.points }}</span>
+                            </div>
+                        </div>
 
-                    </tr>
+                    </td>
                 {% endfor %}
+
+            </tr>
+        {% endfor %}
+        </tbody>
     </table>
 
 {% endblock %}
