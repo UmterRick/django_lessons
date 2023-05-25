@@ -8,21 +8,22 @@ from .models import Lesson, StudentLessonRelation, Group, LMSUser
 def main_page(request):
     group = Group.objects.first()
     teacher = LMSUser.objects.get(group=group, role='teacher')
+    students = LMSUser.objects.filter(group=group, role='student')
     relations = StudentLessonRelation.objects.filter(student__group=group.pk).order_by('lesson__date')
     lessons = Lesson.objects.all().order_by('date')
     journal = {}
     for relation in relations:
 
-        if relation.student not in journal:
-            journal[relation.student] = [relation]
+        if relation.student.pk not in journal:
+            journal[relation.student.pk] = {relation.lesson.pk: relation}
         else:
-            journal[relation.student].append(relation)
-
+            journal[relation.student.pk].update({relation.lesson.pk: relation})
+    print(journal)
     return render(request=request, template_name="journal.html",
                   context={"teacher": teacher,
                            "journal": journal,
                            "lessons": lessons,
-                           "rels": relations,
+                           "students": students,
                            "group": group,
                            })
 

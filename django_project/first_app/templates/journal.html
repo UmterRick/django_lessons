@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load app_tags %}
 {% block title %} Journal {% endblock %}
 {% block group-info %}
     <h2> {{ group.title }}</h2>
@@ -14,29 +15,37 @@
                     <div class="col-2 journal-col min-width">{{ lesson.title }}</div>
                 {% endfor %}
             </div>
-            {% for student, lesson_info in journal.items %}
+            {% for student in students %}
                 <div class="row">
                     <div class="col-2 journal-col">
                         <a href="{% url 'student-info' pk=student.pk %}">{{ student.email }}</a>
                     </div>
 
-                    {% for lesson_relation in lesson_info %}
-                        <div class="col-2 journal-col">
-                            <div class="journal-student-cell d-flex flex-row justify-content-around w-20 align-items-center">
-                                <div class="d-flex mx-auto align-items-center">
-                                    {% if lesson_relation.visited %}
-                                        <a href="{%  url 'switch-visited' student_pk=student.pk lesson_pk=lesson_relation.lesson.pk %}"><i class="mx-auto  bi bi-check btn btn-info"></i></a>
-                                    {% else %}
-                                        <a href="{%  url 'switch-visited' student_pk=student.pk lesson_pk=lesson_relation.lesson.pk %}"><i class="mx-auto  bi bi-x-square btn btn-info"></i></a>
-                                    {% endif %}
+                    {% for lesson in lessons %}
+                    {% with journal|get_item:student.pk|get_item:lesson.pk as student_lesson %}
+                        {% if student_lesson %}
+                            <div class="col-2 journal-col">
+                                <div class="journal-student-cell d-flex flex-row justify-content-around w-20 align-items-center">
+                                    <div class="d-flex mx-auto align-items-center">
+                                        {% if student_lesson.visited %}
+                                            <a href="{% url 'switch-visited' student_pk=student.pk lesson_pk=lesson.pk %}"><i
+                                                    class="mx-auto  bi bi-check btn btn-info"></i></a>
+                                        {% else %}
+                                            <a href="{% url 'switch-visited' student_pk=student.pk lesson_pk=lesson.pk %}"><i
+                                                    class="mx-auto  bi bi-x-square btn btn-info"></i></a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="d-flex flex-column pl-2">
+                                        <span><strong>Comment: </strong> {{ student_lesson.comment|truncatechars:10 }}</span>
+                                        <span><strong>Points:</strong> {{ student_lesson.points }}</span>
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column pl-2">
-                                    <span><strong>Comment: </strong> {{ lesson_relation.comment|truncatechars:10 }}</span>
-                                    <span><strong>Points:</strong> {{ lesson_relation.points }}</span>
-                                </div>
-                            </div>
 
-                        </div>
+                            </div>
+                        {% else %}
+                            <div class="col-2 journal-col"></div>
+                        {% endif %}
+                        {% endwith %}
                     {% endfor %}
                 </div>
             {% endfor %}
