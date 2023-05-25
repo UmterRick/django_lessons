@@ -135,10 +135,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # Tell nose to measure coverage on the 'foo' and 'bar' apps
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=foo,bar',
-]
+# NOSE_ARGS = [
+#     '--with-coverage',
+#     '--cover-package=foo,bar',
+# ]
