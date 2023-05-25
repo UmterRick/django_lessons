@@ -18,7 +18,6 @@ def main_page(request):
             journal[relation.student.pk] = {relation.lesson.pk: relation}
         else:
             journal[relation.student.pk].update({relation.lesson.pk: relation})
-    print(journal)
     return render(request=request, template_name="journal.html",
                   context={"teacher": teacher,
                            "journal": journal,
@@ -28,8 +27,9 @@ def main_page(request):
                            })
 
 
-def render_lesson_info(request):
-    ...
+def render_lesson_info(request, pk):
+    lesson = Lesson.objects.get(pk=pk)
+    return render(request=request, template_name="lesson.html", context={"lesson": lesson})
 
 
 def render_student_profile(request, pk):

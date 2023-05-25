@@ -12,7 +12,8 @@
             <div class="row">
                 <div class="col-2  journal-col"> Student</div>
                 {% for lesson in lessons %}
-                    <div class="col-2 journal-col min-width">{{ lesson.title }}</div>
+                    <div class="col-2 journal-col min-width"><a
+                            href="{% url 'lesson-info' pk=lesson.pk %}"> {{ lesson.title }}</a></div>
                 {% endfor %}
             </div>
             {% for student in students %}
@@ -22,29 +23,29 @@
                     </div>
 
                     {% for lesson in lessons %}
-                    {% with journal|get_item:student.pk|get_item:lesson.pk as student_lesson %}
-                        {% if student_lesson %}
-                            <div class="col-2 journal-col">
-                                <div class="journal-student-cell d-flex flex-row justify-content-around w-20 align-items-center">
-                                    <div class="d-flex mx-auto align-items-center">
-                                        {% if student_lesson.visited %}
-                                            <a href="{% url 'switch-visited' student_pk=student.pk lesson_pk=lesson.pk %}"><i
-                                                    class="mx-auto  bi bi-check btn btn-info"></i></a>
-                                        {% else %}
-                                            <a href="{% url 'switch-visited' student_pk=student.pk lesson_pk=lesson.pk %}"><i
-                                                    class="mx-auto  bi bi-x-square btn btn-info"></i></a>
-                                        {% endif %}
+                        {% with journal|get_item:student.pk|get_item:lesson.pk as student_lesson %}
+                            {% if student_lesson %}
+                                <div class="col-2 journal-col">
+                                    <div class="journal-student-cell d-flex flex-row justify-content-around w-20 align-items-center">
+                                        <div class="d-flex mx-auto align-items-center">
+                                            {% if student_lesson.visited %}
+                                                <a href="{% url 'switch-visited' student_pk=student.pk lesson_pk=lesson.pk %}"><i
+                                                        class="mx-auto  bi bi-check btn btn-info"></i></a>
+                                            {% else %}
+                                                <a href="{% url 'switch-visited' student_pk=student.pk lesson_pk=lesson.pk %}"><i
+                                                        class="mx-auto  bi bi-x-square btn btn-info"></i></a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="d-flex flex-column pl-2">
+                                            <span><strong>Comment: </strong> {{ student_lesson.comment|truncatechars:10 }}</span>
+                                            <span><strong>Points:</strong> {{ student_lesson.points }}</span>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column pl-2">
-                                        <span><strong>Comment: </strong> {{ student_lesson.comment|truncatechars:10 }}</span>
-                                        <span><strong>Points:</strong> {{ student_lesson.points }}</span>
-                                    </div>
-                                </div>
 
-                            </div>
-                        {% else %}
-                            <div class="col-2 journal-col"></div>
-                        {% endif %}
+                                </div>
+                            {% else %}
+                                <div class="col-2 journal-col"></div>
+                            {% endif %}
                         {% endwith %}
                     {% endfor %}
                 </div>
