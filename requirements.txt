@@ -4,8 +4,10 @@ bx-py-utils==81
 Django==4.2.1
 django-debug-toolbar==4.1.0
 django-extensions==3.2.1
+django-nose==1.4.7
 django-tools==0.54.0
 icdiff==2.0.6
+nose==1.3.7
 pprintpp==0.4.0
 psycopg2==2.9.6
 six==1.16.0
