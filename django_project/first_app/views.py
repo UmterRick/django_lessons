@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.http import HttpResponseNotFound
 from .models import Lesson, StudentLessonRelation, Group, LMSUser
 
 
@@ -46,6 +47,9 @@ def switch_student_visited(request, student_pk, lesson_pk):
 def render_lessons_list(request):
     active_lesson_id = request.GET.get("active_lesson_id", None)
     lessons = Lesson.objects.all().order_by("date")
+
+    if not lessons:
+        return HttpResponseNotFound("Lessons are not found")
     if active_lesson_id:
         active_lesson = Lesson.objects.get(title=active_lesson_id)
     else:
