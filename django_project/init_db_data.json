@@ -1,0 +1,137 @@
+[
+  {
+    "model": "first_app.group",
+    "pk": 1,
+    "fields": {
+      "title": "Python Course 1",
+      "description": "New knowledge about programming"
+    }
+  },
+  {
+    "model": "first_app.group",
+    "pk": 2,
+    "fields": {
+      "title": "w3132",
+      "description": ""
+    }
+  },
+  {
+    "model": "first_app.lmsuser",
+    "pk": 2,
+    "fields": {
+      "role": "student",
+      "group": 1
+    }
+  },
+  {
+    "model": "first_app.lmsuser",
+    "pk": 3,
+    "fields": {
+      "role": "student",
+      "group": 1
+    }
+  },
+  {
+    "model": "first_app.lmsuser",
+    "pk": 4,
+    "fields": {
+      "role": "teacher",
+      "group": 1
+    }
+  },
+  {
+    "model": "first_app.lmsuser",
+    "pk": 6,
+    "fields": {
+      "role": "",
+      "group": 1
+    }
+  },
+  {
+    "model": "first_app.lesson",
+    "pk": "2964ffba-5275-4ba7-b531-6ca26b79e822",
+    "fields": {
+      "title": "Variables",
+      "description": "How to define variables",
+      "date": "2023-05-01"
+    }
+  },
+  {
+    "model": "first_app.lesson",
+    "pk": "357c79ce-e366-47cf-879a-6398203a0c2a",
+    "fields": {
+      "title": "5 lesson",
+      "description": "-",
+      "date": "2023-05-05"
+    }
+  },
+  {
+    "model": "first_app.lesson",
+    "pk": "851a0efb-1915-4a05-a066-952975b600eb",
+    "fields": {
+      "title": "3 lesson",
+      "description": "-",
+      "date": "2023-05-03"
+    }
+  },
+  {
+    "model": "first_app.lesson",
+    "pk": "87fdab78-2826-4a34-bc28-c998537236b7",
+    "fields": {
+      "title": "4 lesson",
+      "description": "-",
+      "date": "2023-05-04"
+    }
+  },
+  {
+    "model": "first_app.lesson",
+    "pk": "d15af1ed-f5b1-4026-9373-df58ed2edc9c",
+    "fields": {
+      "title": "Data types",
+      "description": "Which types of data we can use in Python",
+      "date": "2023-05-02"
+    }
+  },
+  {
+    "model": "first_app.lesson",
+    "pk": "e1fc090b-8224-4201-9bcb-b049344ccbbb",
+    "fields": {
+      "title": "6 lesson",
+      "description": "-",
+      "date": "2023-05-06"
+    }
+  },
+  {
+    "model": "first_app.studentlessonrelation",
+    "pk": "0bc4643f-c06c-4b17-99a6-bf363f5ef5db",
+    "fields": {
+      "student": 3,
+      "lesson": "2964ffba-5275-4ba7-b531-6ca26b79e822",
+      "visited": true,
+      "comment": "-",
+      "points": 0
+    }
+  },
+  {
+    "model": "first_app.studentlessonrelation",
+    "pk": "27e3c224-aadf-4876-991b-3e654332a4db",
+    "fields": {
+      "student": 2,
+      "lesson": "d15af1ed-f5b1-4026-9373-df58ed2edc9c",
+      "visited": false,
+      "comment": "-",
+      "points": 100
+    }
+  },
+  {
+    "model": "first_app.studentlessonrelation",
+    "pk": "da5e3c14-3d7b-4051-8292-5d611bf221a6",
+    "fields": {
+      "student": 2,
+      "lesson": "2964ffba-5275-4ba7-b531-6ca26b79e822",
+      "visited": false,
+      "comment": "Hello",
+      "points": 50
+    }
+  }
+]
