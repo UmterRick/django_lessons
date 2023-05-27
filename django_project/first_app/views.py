@@ -13,7 +13,6 @@ def main_page(request):
     lessons = Lesson.objects.all().order_by('date')
     journal = {}
     for relation in relations:
-
         if relation.student.pk not in journal:
             journal[relation.student.pk] = {relation.lesson.pk: relation}
         else:
@@ -40,6 +39,16 @@ def render_student_profile(request, pk):
 
 def switch_student_visited(request, student_pk, lesson_pk):
     relation = StudentLessonRelation.objects.get(student_id=student_pk, lesson_id=lesson_pk)
-    relation.visited = not relation.visited
-    relation.save()
+    relation.change_visited()
     return redirect(main_page)
+
+
+def render_lessons_list(request):
+    active_lesson_id = request.GET.get("active_lesson_id", None)
+    lessons = Lesson.objects.all().order_by("date")
+    if active_lesson_id:
+        active_lesson = Lesson.objects.get(pk=active_lesson_id)
+    else:
+        active_lesson = lessons.first()
+    return render(request, "lessons_list.html", context={"lessons": lessons,
+                                                         "active_lesson": active_lesson})

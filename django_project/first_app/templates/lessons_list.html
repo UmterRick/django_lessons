@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load app_tags %}
+{% block title %} Lessons {% endblock %}
+
+{% block content %}
+    <div id="page-wrapper" class="d-flex flex-row w-100">
+        <div id="lesson-detail-side" class="w-75">
+            <div class="container">
+                <h1>Active Lesson Details</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ active_lesson.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ active_lesson.date }}</h6>
+                        <p class="card-text">{{ active_lesson.description }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="lessons-list-side" class="w-25">
+            <nav class="navbar bg-dark navbar-dark justify-content-center">
+                <ul class="navbar-nav">
+                    {% for lesson in lessons %}
+                        {% if lesson == active_lesson  %}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">{{ forloop.counter }}: {{ lesson.title }}</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ forloop.counter }}: {{ lesson.title }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+

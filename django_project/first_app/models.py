@@ -38,3 +38,7 @@ class StudentLessonRelation(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.lesson} {'Visited' if self.visited else 'Missed'}"
+
+    def change_visited(self):
+        self.visited = not self.visited
+        self.save()
