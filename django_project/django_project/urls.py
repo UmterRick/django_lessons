@@ -23,5 +23,6 @@ urlpatterns = [
     path('', welcome_page, name="welcome-page"),
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('lms/', include('first_app.urls'))
+    path('lms/', include('first_app.urls')),
+    path('auth/', include('auth_app.urls')),
 ]
