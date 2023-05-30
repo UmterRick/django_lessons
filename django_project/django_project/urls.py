@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from first_app.views import welcome_page
+
 
 urlpatterns = [
+    path('', welcome_page, name="welcome-page"),
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
     path('lms/', include('first_app.urls'))

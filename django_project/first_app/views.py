@@ -1,30 +1,38 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponseNotFound
 from .models import Lesson, StudentLessonRelation, Group, LMSUser
-
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout
 
 # Create your views here.
-
+def welcome_page(request):
+    logout(request)
+    return render(request, "welcome.html", context={
+        "user": request.user,
+        "form": AuthenticationForm,
+        "next": reverse('journal-url'),
+    })
 
 def main_page(request):
-    group = Group.objects.first()
-    teacher = LMSUser.objects.get(group=group, role='teacher')
-    students = LMSUser.objects.filter(group=group, role='student')
-    relations = StudentLessonRelation.objects.filter(student__group=group.pk).order_by('lesson__date')
-    lessons = Lesson.objects.all().order_by('date')
-    journal = {}
-    for relation in relations:
-        if relation.student.pk not in journal:
-            journal[relation.student.pk] = {relation.lesson.pk: relation}
-        else:
-            journal[relation.student.pk].update({relation.lesson.pk: relation})
-    return render(request=request, template_name="journal.html",
-                  context={"teacher": teacher,
-                           "journal": journal,
-                           "lessons": lessons,
-                           "students": students,
-                           "group": group,
-                           })
+        print(request.user)
+        group = Group.objects.first()
+        teacher = LMSUser.objects.get(group=group, role='teacher')
+        students = LMSUser.objects.filter(group=group, role='student')
+        relations = StudentLessonRelation.objects.filter(student__group=group.pk).order_by('lesson__date')
+        lessons = Lesson.objects.all().order_by('date')
+        journal = {}
+        for relation in relations:
+            if relation.student.pk not in journal:
+                journal[relation.student.pk] = {relation.lesson.pk: relation}
+            else:
+                journal[relation.student.pk].update({relation.lesson.pk: relation})
+        return render(request=request, template_name="journal.html",
+                      context={"teacher": teacher,
+                               "journal": journal,
+                               "lessons": lessons,
+                               "students": students,
+                               "group": group,
+                               })
 
 
 def render_lesson_info(request, pk):

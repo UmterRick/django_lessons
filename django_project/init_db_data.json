@@ -112,6 +112,17 @@
       "points": 0
     }
   },
+    {
+    "model": "first_app.studentlessonrelation",
+    "pk": "0bc4643f-c06c-4b17-99a6-bf363f5ef5db",
+    "fields": {
+      "student": 3,
+      "lesson": "d15af1ed-f5b1-4026-9373-df58ed2edc9c",
+      "visited": true,
+      "comment": "Rel from fixture",
+      "points": 0
+    }
+  },
   {
     "model": "first_app.studentlessonrelation",
     "pk": "27e3c224-aadf-4876-991b-3e654332a4db",
