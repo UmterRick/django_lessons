@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTH_USER_MODEL = "first_app.LMSUser"
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 

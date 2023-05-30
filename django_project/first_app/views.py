@@ -1,18 +1,14 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponseNotFound
 from .models import Lesson, StudentLessonRelation, Group, LMSUser
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def welcome_page(request):
-    logout(request)
-    return render(request, "welcome.html", context={
-        "user": request.user,
-        "form": AuthenticationForm,
-        "next": reverse('journal-url'),
-    })
+    return render(request, "welcome.html")
 
+
+@login_required(login_url="/auth/login")
 def main_page(request):
         print(request.user)
         group = Group.objects.first()
